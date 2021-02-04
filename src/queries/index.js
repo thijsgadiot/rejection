@@ -9,6 +9,7 @@ export const QUESTIONS = gql`
         question
         askee
         status
+        score @client
       }
     }
   }

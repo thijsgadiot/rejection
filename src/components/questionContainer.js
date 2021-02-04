@@ -12,6 +12,7 @@ export default function QuestionContainer() {
     const updatedQuestion = { ...question, status };
     delete updatedQuestion.__typename;
     delete updatedQuestion._id;
+    delete updatedQuestion.score;
 
     updateQuestion({
       variables: { id: question._id, data: updatedQuestion },

@@ -1,15 +1,18 @@
 import { useState } from "react";
 
-export default function Question({ id, askee, handleStatusClick, timestamp, question, status, score }) {
-  const [isEditing, setisEditing] = useState(false);
-
-  const handleNameClick = () => setisEditing(!isEditing);
-
-  const statuses = [
-    { name: "accepted", value: "ACCEPTED" },
-    { name: "rejected", value: "REJECTED" },
-    { name: "unanswered", value: "UNANSWERED" }
-  ];
+export default function Question({
+  id,
+  askee,
+  handleStatusClick,
+  timestamp,
+  question,
+  status,
+  score,
+  formattedTime = new Date(timestamp).toLocaleDateString("en-GB"),
+  statuses
+}) {
+  const [isEditing, setIsEditing] = useState(false);
+  const handleNameClick = () => setIsEditing(!isEditing);
 
   return (
     <div className={`question ${status.toLowerCase()}`}>
@@ -20,20 +23,20 @@ export default function Question({ id, askee, handleStatusClick, timestamp, ques
         <div className={`edit ${isEditing ? "active" : ""}`}>
           <div className="status">
             <ul>
-              {statuses.map(({ name, value }) => (
+              {statuses.map((name) => (
                 <li
-                  key={name}
-                  className={`${name} ${status === value ? "active" : ""}`}
-                  onClick={() => handleStatusClick({ id, status: value.toUpperCase() })}
+                  key={name.toLowerCase()}
+                  className={`${name.toLowerCase()} ${status === name ? "active" : ""}`}
+                  onClick={() => handleStatusClick({ id, status: name })}
                 >
-                  {value.toLowerCase()}
+                  {name.toLowerCase()}
                 </li>
               ))}
             </ul>
           </div>
           <div className="askee">{askee}</div>
           <div className="divider">&bull;</div>
-          <div className="timestamp">{new Date(timestamp).toLocaleDateString("en-GB")}</div>
+          <div className="timestamp">{formattedTime}</div>
         </div>
       </div>
       <div className="score">{score > 0 ? `+${score}` : ""}</div>
