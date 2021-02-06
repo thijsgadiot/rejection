@@ -1,12 +1,12 @@
 import { useQuery } from "@apollo/client";
 import Head from "next/head";
-import QuestionContainer from "../../src/components/questionContainer";
+import { QuestionContainer } from "../../src/components/questionContainer";
 import TotalScore from "../../src/components/totalScore";
 import AddQuestion from "../../src/components/addQuestion";
 import { QUESTIONS } from "../../src/queries";
 
 export default function Questions() {
-  const { loading, error, data } = useQuery(QUESTIONS);
+  const { data } = useQuery(QUESTIONS);
 
   return (
     <div className="question-container">
@@ -17,8 +17,7 @@ export default function Questions() {
       {data && <TotalScore score={data.questions.data.reduce((a, c) => a + c.score, 0)} />}
 
       <AddQuestion />
-
-      {data && <QuestionContainer questions={data.questions.data} />}
+      <QuestionContainer />
     </div>
   );
 }

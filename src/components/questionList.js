@@ -1,22 +1,25 @@
 import Question from "./question";
 
-export default function QuestionList({ questions, handleStatusClick }) {
+export function QuestionList({ questions, handleStatusClick }) {
+  // todo: move to config.
+  const statuses = ["ACCEPTED", "REJECTED", "UNANSWERED"];
+
   return (
-    <div className="question-container">
+    <div className="question-list">
       <div>
         <ul>
           {questions &&
             questions.map((question) => {
               return (
                 <li key={question._id}>
-                  <Question {...question} handleStatusClick={handleStatusClick(question)} />
+                  <Question {...question} statuses={statuses} handleStatusClick={handleStatusClick(question)} />
                 </li>
               );
             })}
         </ul>
       </div>
       <style jsx>{`
-        .question-container {
+        .question-list {
           padding: 2rem;
           padding-top: 5rem;
         }

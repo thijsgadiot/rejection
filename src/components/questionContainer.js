@@ -1,18 +1,15 @@
 import { useMutation, useQuery } from "@apollo/client";
 import { QUESTIONS } from "../queries/";
 import { UPDATE_QUESTION } from "../mutations/";
-import QuestionList from "./questionList";
+import { QuestionList } from "./questionList";
+import { createQuestion } from "../models/question";
 
-export default function QuestionContainer() {
+export function QuestionContainer({ name }) {
   const { data } = useQuery(QUESTIONS);
   const [updateQuestion] = useMutation(UPDATE_QUESTION);
 
   const handleStatusClick = (question) => ({ status }) => {
-    // todo: use factory function for this.
-    const updatedQuestion = { ...question, status };
-    delete updatedQuestion.__typename;
-    delete updatedQuestion._id;
-    delete updatedQuestion.score;
+    const updatedQuestion = createQuestion({ ...question, status });
 
     updateQuestion({
       variables: { id: question._id, data: updatedQuestion },
