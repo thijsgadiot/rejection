@@ -1,9 +1,7 @@
 import Question from "./question";
+import { statuses } from "../models/question";
 
 export function QuestionList({ questions, handleStatusClick }) {
-  // todo: move to config.
-  const statuses = ["ACCEPTED", "REJECTED", "UNANSWERED"];
-
   return (
     <div className="question-list">
       <div>
