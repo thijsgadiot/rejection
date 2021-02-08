@@ -5,11 +5,11 @@ export const QUESTIONS = gql`
     questions {
       data {
         _id
-        timestamp
-        question
         askee
-        status
+        question
         score @client
+        status
+        timestamp
       }
     }
   }
