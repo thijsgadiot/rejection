@@ -2,8 +2,8 @@ import React from "react";
 import { QuestionContainer } from "./questionContainer";
 import { QuestionList } from "./questionList";
 import { MockedProvider } from "@apollo/client/testing";
-import { QUESTIONS } from "../queries/";
-import { create, act } from "react-test-renderer";
+import { QUESTIONS } from "../queries";
+import { create } from "react-test-renderer";
 
 import { describe } from "riteway";
 
@@ -19,9 +19,9 @@ const mock = {
             _id: "123456",
             askee: "my momz",
             question: "can i have some candy",
+            score: "100",
             status: "REJECTED",
-            timestamp: "456456456",
-            score: "100"
+            timestamp: "456456456"
           }
         ]
       }
@@ -29,7 +29,7 @@ const mock = {
   }
 };
 
-describe("Question component", async (assert) => {
+describe("QuestionContainer component", async (assert) => {
   {
     const component = create(
       <MockedProvider mocks={[mock]} addTypename={false}>
@@ -39,30 +39,14 @@ describe("Question component", async (assert) => {
 
     await new Promise((resolve) => setTimeout(resolve, 0));
 
-    const expected = mock.result.data.questions.data;
     const actual = component.root.findByType(QuestionList).props.questions;
+    const expected = mock.result.data.questions.data;
 
-    console.log("actual", actual);
-    console.log("exected", expected);
     assert({
-      given: "a question container ... <-- text needs work.",
-      should: "render the question",
-      actual: actual === expected,
-      expected: true
+      given: "a question container and a QUESTIONS query",
+      should: "pass the questions as a prop to the QuestionList component",
+      actual,
+      expected
     });
   }
 });
-
-// it("should render question component", async () => {
-//   const component = create(
-//     <MockedProvider mocks={[mock]} addTypename={false}>
-//       <QuestionContainer />
-//     </MockedProvider>
-//   );
-
-//   await new Promise((resolve) => setTimeout(resolve, 0));
-
-//   const expected = mock.result.data.questions.data;
-//   const actual = component.root.findByType(QuestionList).props.questions;
-//   expect(actual).toEqual(expected);
-// });
