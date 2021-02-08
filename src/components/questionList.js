@@ -9,7 +9,7 @@ export function QuestionList({ questions, handleStatusClick }) {
           {questions &&
             questions.map((question) => {
               return (
-                <li key={question._id}>
+                <li className="question" key={question._id}>
                   <Question {...question} statuses={statuses} handleStatusClick={handleStatusClick(question)} />
                 </li>
               );
