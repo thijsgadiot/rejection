@@ -1,10 +1,10 @@
-export default function TotalScore({ score }) {
+export default function TotalScore({ score, target = 500 }) {
   return (
     <div className="total-score">
       <div>
         <div className="total">{score}</div>
         <div className="divider">&nbsp;</div>
-        <div className="target">500</div>
+        <div className="target">{target}</div>
         <span className="label">weekly target</span>
       </div>
 
