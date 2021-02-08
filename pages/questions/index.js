@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { QuestionContainer } from "../../src/components/questionContainer";
 import TotalScoreContainer from "../../src/components/totalScoreContainer";
-import AddQuestion from "../../src/components/addQuestion";
+import AddQuestionContainer from "../../src/components/addQuestionContainer";
 
 export default function Questions() {
   return (
@@ -11,7 +11,7 @@ export default function Questions() {
       </Head>
 
       <TotalScoreContainer />
-      <AddQuestion />
+      <AddQuestionContainer />
       <QuestionContainer />
     </div>
   );
