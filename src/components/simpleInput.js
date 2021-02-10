@@ -1,24 +1,18 @@
 import { useState } from "react";
 
-export default function AddQuestion({ handleAdd }) {
-  const [question, setQuestion] = useState("");
-
+export default function SimpleInput({ placeholder, handleChange, handleKeyPress, value }) {
   return (
-    <div className="add-question">
+    <div className="input-container">
       <input
+        className="abc"
         type="text"
-        value={question}
-        placeholder="..."
-        onChange={({ target }) => setQuestion(target.value)}
-        onKeyPress={({ key, target }) => {
-          if (key === "Enter") {
-            handleAdd({ text: target.value });
-            setQuestion("");
-          }
-        }}
+        value={value}
+        placeholder={placeholder}
+        onChange={({ target }) => handleChange(target.value)}
+        onKeyPress={({ key }) => handleKeyPress(key)}
       />
       <style jsx>{`
-        .add-question {
+        .input-container {
           padding: 2rem;
         }
         input[type="text"] {

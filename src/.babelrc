@@ -6,5 +6,6 @@
         "proposals": true
     },
       "useBuiltIns": "usage"
-    }]]
+    }],
+    ["next/babel"]]
 }
